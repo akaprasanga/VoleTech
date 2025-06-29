@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>VoleTech - Cyber Security Consulting</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    .navbar {
+      background: rgba(0, 0, 0, 1);
+    }
+
+    .hero {
+      background: url('images/logo.jpg') no-repeat center center/cover;
+      color: white;
+      height: 100vh;
+      position: relative;
+    }
+
+    .hero-overlay {
+      background: rgba(0, 0, 0, 0.6);
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 0 20px;
+      z-index: 1;
+    }
+
+    .hero .container {
+      position: relative;
+      z-index: 2;
+    }
+
+    .navbar-nav .nav-link {
+      color: white !important;
+    }
+
+    .service-icon {
+      font-size: 2.5rem;
+      color: #007bff;
+    }
+
+    .navbar-brand {
+      background-image: linear-gradient(to right, #255b7c, #28a745, #bb5924); /* Added green */
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .footer {
+      background-color: #0d1117;
+      color: #bbb;
+      padding: 30px 0;
+    }
+
+    .footer a {
+      color: #bbb;
+      text-decoration: none;
+    }
+
+    .footer a:hover {
+      color: white;
+    }
+
+    .logo-img {
+      height: 30px;
+      width: auto;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="#">
+        <img src="images/logo.jpg" alt="VoleTech Logo" class="logo-img me-2">VoleTech LLC
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="#about">About Us</a></li>
+          <li class="nav-item"><a class="nav-link" href="#contact">Contact Us</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-overlay">
+      <div class="container">
+        <h1 class="display-4 fw-bold">Architecting Your Digital Future</h1>
+        <p class="lead">Cyber Security Consulting for a Safer Digital World</p>
+        <a href="#contact" class="btn btn-primary btn-lg mt-3">Get a Free Consultation</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="py-5 bg-light">
+    <div class="container">
+      <div class="text-center mb-5">
+        <h2>Who We Are</h2>
+        <p class="text-muted">Expert consultants with years of experience defending organizations from cyber threats.</p>
+      </div>
+      <div class="row align-items-center">
+        <div class="col-md-6">
+          <img src="https://images.unsplash.com/photo-1591696205602-2f950c417cb9" class="img-fluid rounded" alt="Cyber security">
+        </div>
+        <div class="col-md-6">
+          <h4>VoleTech Consulting</h4>
+          <p>We help businesses safeguard their infrastructure, detect threats, and comply with regulatory standards. From penetration testing to threat modeling and incident response—we've got your back.</p>
+          <ul>
+            <li>Risk Assessment & Compliance</li>
+            <li>Security Audits & Pen Testing</li>
+            <li>Incident Response Planning</li>
+            <li>Cloud & Network Security</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services Section -->
+  <section id="services" class="py-5">
+    <div class="container">
+      <div class="text-center mb-5">
+        <h2>Our Services</h2>
+        <p class="text-muted">Comprehensive and tailored security solutions.</p>
+      </div>
+      <div class="row g-4">
+        <div class="col-md-4 text-center">
+          <div class="service-icon mb-3"><i class="bi bi-shield-lock"></i></div>
+          <h5>Security Audits</h5>
+          <p>Identify vulnerabilities and ensure system robustness with regular audits.</p>
+        </div>
+        <div class="col-md-4 text-center">
+          <div class="service-icon mb-3"><i class="bi bi-cloud-check"></i></div>
+          <h5>Cloud Security</h5>
+          <p>Secure your cloud infrastructure with best-in-class practices and monitoring.</p>
+        </div>
+        <div class="col-md-4 text-center">
+          <div class="service-icon mb-3"><i class="bi bi-bug"></i></div>
+          <h5>Penetration Testing</h5>
+          <p>Simulate real-world attacks to test your defenses before hackers do.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="py-5 bg-dark text-white">
+    <div class="container">
+      <div class="text-center mb-4">
+        <h2>Contact Us</h2>
+        <p>Let's secure your business together.</p>
+      </div>
+      <div class="row justify-content-center">
+        <div class="col-md-8">
+          <form>
+            <div class="mb-3">
+              <label for="name" class="form-label">Full Name</label>
+              <input type="text" class="form-control" id="name" placeholder="John Doe" required>
+            </div>
+            <div class="mb-3">
+              <label for="email" class="form-label">Email Address</label>
+              <input type="email" class="form-control" id="email" placeholder="you@example.com" required>
+            </div>
+            <div class="mb-3">
+              <label for="message" class="form-label">Message</label>
+              <textarea class="form-control" id="message" rows="4" placeholder="How can we help you?" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Send Message</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer text-center">
+    <div class="container">
+      <p>&copy; 2025 VoleTech Consulting. All rights reserved.</p>
+      <p>
+        <a href="#">Privacy Policy</a> | <a href="#">Terms of Use</a>
+      </p>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
