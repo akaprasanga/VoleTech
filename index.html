@@ -209,6 +209,13 @@
   <script>
     function submitToAPI(e) {
        e.preventDefault();
+       
+       // Disable submit button to prevent multiple submissions
+       var submitButton = document.querySelector('#contact-form button[type="submit"]');
+       var originalButtonText = submitButton.innerHTML;
+       submitButton.disabled = true;
+       submitButton.innerHTML = 'Sending...';
+       
        var URL = "https://irhukdozwi.execute-api.us-east-1.amazonaws.com/dev/contact-us";
 
             var Namere = /[A-Za-z]{1}[A-Za-z]/;
@@ -237,10 +244,10 @@
        var email = $("#email-input").val();
        var desc = $("#description-input").val();
        var data = {
-          name : name,
-          phone : phone,
-          email : email,
-          desc : desc
+          "name" : name,
+          "phone" : phone,
+          "email" : email,
+          "desc" : desc
         };
 
        // Use a CORS proxy to bypass CORS restrictions
@@ -253,47 +260,68 @@
          "https://cors-anywhere.herokuapp.com/"
        ];
        var proxyUrl = proxyUrls[0]; // Use the first proxy by default
-       
-       $.ajax({
-         type: "POST",
-         url: proxyUrl + encodeURIComponent(targetUrl),
-         dataType: "json",
-         contentType: "application/json; charset=utf-8",
-         data: JSON.stringify(data),
-         
-         success: function (response) {
+       console.log("Sending following data to API::");
+       console.log("Data object:", data);
+       console.log("JSON stringified:", JSON.stringify(data));
+       // Try using fetch API first (better CORS handling)
+       fetch(targetUrl, {
+         method: 'POST',
+         headers: {
+           'Content-Type': 'application/json',
+         },
+         body: JSON.stringify(data)
+       })
+       .then(response => {
+         console.log("Fetch response status:", response.status);
+         if (!response.ok) {
+           throw new Error(`HTTP error! status: ${response.status}`);
+         }
+         return response.json();
+       })
+                .then(response => {
+           console.log("Direct connection successful:", response);
            alert("Successfull");
            document.getElementById("contact-form").reset();
+           // Re-enable button before reload
+           submitButton.disabled = false;
+           submitButton.innerHTML = originalButtonText;
            location.reload();
-         },
-         error: function (xhr, status, error) {
-           console.log("Error Status:", xhr.status);
-           console.log("Error Response:", xhr.responseText);
-           
-           // Try alternative proxy if first one fails
-           if (xhr.status === 404 || xhr.status === 0) {
-             console.log("Trying alternative proxy...");
-             $.ajax({
-               type: "POST",
-               url: "https://api.allorigins.win/raw?url=" + encodeURIComponent(targetUrl),
-               dataType: "json",
-               contentType: "application/json; charset=utf-8",
-               data: JSON.stringify(data),
-               
-               success: function (response) {
-                 alert("Successfull");
-                 document.getElementById("contact-form").reset();
-                 location.reload();
-               },
-               error: function (xhr2, status2, error2) {
-                 console.log("Alternative proxy also failed:", error2);
-                 alert("UnSuccessfull: " + error2 + "\n\nPlease check your API endpoint configuration.");
-               }
-             });
-           } else {
-             alert("UnSuccessfull: " + error);
+         })
+       .catch(error => {
+         console.log("Direct connection failed, trying CORS proxy...");
+         console.log("Error:", error);
+         
+         // Try CORS proxy as fallback
+         fetch(proxyUrl + encodeURIComponent(targetUrl), {
+           method: 'POST',
+           headers: {
+             'Content-Type': 'application/json',
+           },
+           body: JSON.stringify(data)
+         })
+         .then(response => {
+           console.log("Proxy response status:", response.status);
+           if (!response.ok) {
+             throw new Error(`HTTP error! status: ${response.status}`);
            }
-         }
+           return response.json();
+         })
+         .then(response => {
+           console.log("Proxy connection successful:", response);
+           alert("Successfull (via proxy)");
+           document.getElementById("contact-form").reset();
+           // Re-enable button before reload
+           submitButton.disabled = false;
+           submitButton.innerHTML = originalButtonText;
+           location.reload();
+         })
+         .catch(error2 => {
+           console.log("CORS proxy also failed:", error2);
+           alert("UnSuccessfull: " + error2 + "\n\nPlease check your API endpoint configuration.");
+           // Re-enable button on error
+           submitButton.disabled = false;
+           submitButton.innerHTML = originalButtonText;
+         });
        });
      }
   </script>
